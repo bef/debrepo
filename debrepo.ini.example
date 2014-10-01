@@ -1,0 +1,15 @@
+[GLOBAL]
+signkey = 0x12345678
+
+[debian-wheezy]
+;Codename = wheezy
+Architectures = amd64 armhf i386
+Components = main
+Description = personal repo for wheezy
+Suite = debian-wheezy
+
+[ubuntu-trusty]
+Architectures = amd64
+Components = main
+Description = personal repo for trusty
+Suite = ubuntu-trusty
