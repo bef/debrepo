@@ -87,13 +87,15 @@ proc cmp_deb_version {v1 v2} {
 	## compare debian revision
 	set extra1 ""
 	set extra2 ""
-	regexp -- {^(\d+)~(.*)$} $v1 -> deb1 extra1
-	regexp -- {^(\d+)~(.*)$} $v2 -> deb2 extra1
-	if {![string is integer $deb1] || ![string is integer $deb2]} { return [string compare $deb1 $deb2] }
+	regexp -- {^(\d+)~?(.*)$} $deb1 -> deb1 extra1
+	regexp -- {^(\d+)~?(.*)$} $deb2 -> deb2 extra2
 	if {$deb1 < $deb2} { return -1 }
 	if {$deb1 > $deb2} { return 1 }
 	
 	## finally compare debian revision extra (after ~)
+	if {$extra1 eq $extra2} { return 0 }
+	if {$extra1 eq ""} { return 1 }
+	if {$extra2 eq ""} { return -1 }
 	return [string compare $extra1 $extra2]
 }
 
